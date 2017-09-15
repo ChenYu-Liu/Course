@@ -16,7 +16,6 @@ Shapes.o: $(INC_DIR)/Shapes.h Shapes.cpp
 	g++ -std=gnu++0x -c Shapes.cpp
 Media.o: $(INC_DIR)/Media.h Media.cpp
 	g++ -std=gnu++0x -c Media.cpp
-
 clean:	
 ifeq (${OS}, Windows_NT)
 	del *.o *.exe
