@@ -1,48 +1,51 @@
 #ifndef EXP_H
 #define EXP_H
-#include "include/Shapes.h"
-#include "include/Media.h"
-#include "include/Sort.h"
+#include "Shapes.h"
+#include "Media.h"
+#include "Sort.h"
+#include <iostream>
+using namespace std;
 
-list<Shape*> ShapeList;
-const double epsilon = 0.000001;
+TEST(Sort, sortByIncreasingPerimeter) {
+	//list<Shape*> ShapeList;
+	//   auto Compare = [&](const double &a ,const double &b)->bool{if(a>b)return true; else return false;};    
+	//   list<double> answer {18.0,18.84954};
+	//   Rectangle rectangle(2.,3.,4.,5.,"rectangle");
+	//   Circle circle(2,3,4,"circle");
+	//   //Triangle triangle(,2,3);
 
-TEST (Sort, sortByIncreasingPerimeter) {
-    auto Compare = [&](const double &a ,const double &b)->bool{if(a>b)return true; else return false;};    
-    list<double> answer {18.0,18.84954};
-    Rectangle rectangle(2,3,4,5,"rectangle");
-    Circle circle(2,3,4,"circle");
-    Triangle triangle(4,2,3,"triangle");
-
-    ShapeList.push_back(rectangle.perimeter());
-    ShapeList.push_back(circle.perimeter());
-    ShapeList.push_back(triangle.perimeter());
-    ShapeList.Sort(Compare);
-
-    list<double>::iterator itans;
-    itans = answer.begin();
-    list<double>::Iterator it;
-    for(it = ShapeList.begin();it!=ShapeList.end();it++,itans++)
-    {
-        ASSERT_EQ(it,itans,epsilon);    
-    }
-    
-}
-
-TEST (Sort, sortByDecreasingPerimeter) {
+	//   ShapeList.push_back(&rectangle);
+	//   ShapeList.push_back(&circle);
+	//   //ShapeList.push_back(&triangle);
+	//   ShapeList.sort(Compare);
+	//list<Shape*>::iterator it = ShapeList.begin();
+	//ASSERT_EQ("test", "");
 
 }
 
-TEST (Sort, sortByIncreasingArea) {
-
+TEST(mytest)
+{
+	Rectangle rectangle(2., 3., 4., 5., "rectangle");
+	cout << rectangle.perimeter() << "\n";
+	Circle circle(2, 3, 4, "circle");
+	cout << circle.perimeter() << "\n";
 }
 
-TEST (Sort, sortByDecreasingArea) {
-
-}
-
-TEST (Sort, sortByIncreasingCompactness) {
-
-}
-
+//
+//TEST (Sort, sortByDecreasingPerimeter) {
+//
+//}
+//
+//TEST (Sort, sortByIncreasingArea) {
+//
+//}
+//
+//TEST (Sort, sortByDecreasingArea) {
+//
+//}
+//
+//TEST (Sort, sortByIncreasingCompactness) {
+//
+//}
+//
 #endif
