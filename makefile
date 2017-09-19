@@ -4,9 +4,9 @@ INC_DIR = include
 
 hw1: main.o Shapes.o Media.o
 ifeq (${OS}, Windows_NT)
-	g++ -o exp mainExp.o Shapes.o Media.o -lgtest
+	g++ -o exp main.o Shapes.o Media.o -lgtest
 else
-	g++ -o exp mainExp.o Shapes.o Media.o -lgtest -lpthread
+	g++ -o exp main.o Shapes.o Media.o -lgtest -lpthread
 endif
 	
 main.o: main.cpp utSort.h $(INC_DIR)/Sort.h
