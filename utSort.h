@@ -3,7 +3,6 @@
 #include "include\Shapes.h"
 #include <iostream>
 #include<list>
-#include<math.h>
 using namespace std;
 
 Rectangle rectangle(2., 3., 4., 5., "rectangle");
@@ -19,8 +18,8 @@ auto ByDecreasingPerimeter = [&](const Shape* a, const Shape* b)->bool{if ((*a).
 auto ByIncreasAera = [&](const Shape* a, const Shape* b)->bool{if ((*a).area() < (*b).area())return true; else return false; };
 auto ByDecreasingAera = [&](const Shape* a, const Shape* b)->bool{if ((*a).area() > (*b).area())return true; else return false; };
 auto ByIncreasCompactness = [&](const Shape* a, const Shape* b)->bool{
-	double first = 4 * M_PI*(*a).area() / pow((*a).perimeter(), 2);
-	double second = 4 * M_PI*(*b).area() / pow((*b).perimeter(), 2);
+	double first = (*a).area() / (*a).perimeter();
+	double second = (*b).area() /(*b).perimeter();
 	if (first < second)
 		return true;
 	else
