@@ -1,8 +1,8 @@
 #ifndef EXP_H
 #define EXP_H
-#include "Shapes.h"
-#include "Media.h"
-#include "Sort.h"
+#include "include\Shapes.h"
+#include "include\Media.h"
+#include "include\Sort.h"
 #include <iostream>
 #include<list>
 #include<math.h>
