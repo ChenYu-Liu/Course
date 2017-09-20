@@ -1,6 +1,6 @@
 INC_DIR = include
 
-
+all:hw1
 
 hw1: main.o Shapes.o Media.o
 ifeq (${OS}, Windows_NT)
