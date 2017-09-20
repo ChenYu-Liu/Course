@@ -6,11 +6,9 @@
 #include<math.h>
 using namespace std;
 
-vertex one = { 2.0f, 2.0f }; vertex two = { 3.1f, 2.3f }; vertex three = { 1.2f, 3.2f };
 Rectangle rectangle(2., 3., 4., 5., "rectangle");
 Circle circle(2, 3, 4, "circle");
-//Triangle triangle(vertex{ 2.0, 2.0 }, vertex{ 3.1f, 2.3f }, vertex{ 1.2f, 3.2f }, "triangle");
-Triangle triangle(one, two, three, "triangle");
+Triangle triangle(vertex{ 2.0, 2.0 }, vertex{ 3.1f, 2.3f }, vertex{ 1.2f, 3.2f }, "triangle");
 //Shape ฎeพน
 list<Shape*> ShapeList{ &rectangle, &circle, &triangle };
 //ShapeList pointer
