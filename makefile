@@ -9,7 +9,7 @@ else
 	g++ -o hw1 main.o Shapes.o Media.o -lgtest -lpthread
 endif
 	
-main.o: main.cpp utSort.h $(INC_DIR)/Sort.h Shapes.h Shapes.cpp
+main.o: main.cpp utSort.h $(INC_DIR)/Sort.h
 	g++ -std=gnu++0x -c main.cpp
 Shapes.o: $(INC_DIR)/Shapes.h Shapes.cpp
 	g++ -std=gnu++0x -c Shapes.cpp
