@@ -1,7 +1,6 @@
-// HW2_Matching.cpp : ©w¸q¥D±±¥xÀ³¥Îµ{¦¡ªº¶i¤JÂI¡C
+// HW2_Matching.cpp : ï¿½wï¿½qï¿½Dï¿½ï¿½ï¿½xï¿½ï¿½ï¿½Îµ{ï¿½ï¿½ï¿½ï¿½ï¿½iï¿½Jï¿½Iï¿½C
 //
 
-#include "stdafx.h"
 #include"utTerm.h"
 #include<gtest\gtest.h>
 
