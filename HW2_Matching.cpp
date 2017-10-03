@@ -1,6 +1,6 @@
 // HW2_Matching.cpp : �w�q�D���x���ε{�����i�J�I�C
 //
-
+#include"stdafx.h"
 #include"utTerm.h"
 #include<gtest\gtest.h>
 
