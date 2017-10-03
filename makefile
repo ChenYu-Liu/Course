@@ -10,7 +10,7 @@ else
 endif
 	
 main.o: HW2_Matching.cpp atom.h Number.h PrologCompare.h utTerm.h variable.h
-	g++ -std=gnu++0x -c main.cpp
+	g++ -std=gnu++0x -c HW2_Matching.cpp
 
 
 clean:	
