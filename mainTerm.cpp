@@ -2,6 +2,9 @@
 //
 #include"stdafx.h"
 #include"utTerm.h"
+#include"Number.h"
+#include"atom.h"
+#include"variable.h"
 #include<gtest\gtest.h>
 
 int _tmain(int argc, _TCHAR* argv[])
