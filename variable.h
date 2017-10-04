@@ -19,14 +19,14 @@ private:
 
 
 Var::Var(string s){
-	if ((char)s[0] > 64 & (char)s[0] < 91)	{
-		_symbol = s;
-		_value = s;
-		_type = "Var";
-	}
-	else{
-		cout << "Create Atom boj fail. The first latter must be capitalized.";
-	}
+	//if ((char)s[0] > 64 & (char)s[0] < 91)	{
+	_symbol = s;
+	_value = s;
+	_type = "Var";
+	//}
+	//else{
+	//	cout << "Create Atom boj fail. The first latter must be capitalized.";
+	//}
 }
 
 bool Var::match(Prolog& ClsObj){

@@ -19,14 +19,14 @@ private:
 };
 
 Atom::Atom(string s){
-	if (!((char)s[0] > 64 & (char)s[0] < 91))	{
-		_symbol = s;
-		_value = s;
-		_type = "Atom";
-	}
-	else{
-		cout << "Create Atom boj fail. First letter lower case.";
-	}
+	//if (!((char)s[0] > 64 & (char)s[0] < 91))	{
+	_symbol = s;
+	_value = s;
+	_type = "Atom";
+	//}
+	//else{
+	//	cout << "Create Atom boj fail. First letter lower case.";
+	//}
 }
 
 string Atom::value(){
