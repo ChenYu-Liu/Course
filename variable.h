@@ -3,7 +3,7 @@
 
 #include <string>
 #include"PrologCompare.h"
-using std::string;
+using namespace std;
 
 class Var :public Prolog{
 public:
@@ -32,7 +32,7 @@ Var::Var(string s){
 bool Var::match(Prolog& ClsObj){
 	bool Check = true;
 	if (ClsObj.type() == _type){
-		Check = _value ==ClsObj.value();
+		Check = _value == ClsObj.value();
 	}
 	else if (ClsObj.type() == "Atom" | ClsObj.type() == "Number"){
 		_value = ClsObj.symbol();
