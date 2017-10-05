@@ -4,7 +4,7 @@
 #include<iostream>
 #include<sstream>
 #include <string>
-#include"PrologCompare.h"
+#include"prolog.h"
 using namespace std;
 
 class  Atom :public Prolog{

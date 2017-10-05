@@ -2,7 +2,7 @@
 #define VARIABLE_H
 
 #include <string>
-#include"PrologCompare.h"
+#include"prolog.h"
 using namespace std;
 
 class Var :public Prolog{

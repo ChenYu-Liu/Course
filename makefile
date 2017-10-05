@@ -7,7 +7,7 @@ else
 	g++ -o hw2 mainTerm.o -lgtest -lpthread
 endif
 	
-main.o: main.cpp atom.h Number.h PrologCompare.h utTerm.h variable.h stdafx.cpp stdafx.h targetver.h
+main.o: mainTerm.cpp atom.h number.h prolog.h utTerm.h variable.h stdafx.cpp stdafx.h targetver.h
 	g++ -std=gnu++0x -c main.cpp
 
 

@@ -3,7 +3,7 @@
 #include<iostream>
 #include<string>
 #include<typeinfo>
-#include"Number.h"
+#include"number.h"
 #include"atom.h"
 #include"variable.h"
 #include<gtest\gtest.h>

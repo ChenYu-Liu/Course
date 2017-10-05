@@ -3,7 +3,7 @@
 
 #include<iostream>
 #include<string>
-#include"PrologCompare.h"
+#include"prolog.h"
 using std::string;
 
 class  Number :public Prolog
