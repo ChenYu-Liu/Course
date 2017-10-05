@@ -1,9 +1,6 @@
 #ifndef UTTERM_H
 #define UTTERM_H
-
-//#include "variable.h"
-//#include "atom.h"
-//#include "number.h"
+#include "number.h"
 
 //test Number.value()
 TEST (Number, ctor) {
@@ -85,6 +82,5 @@ TEST (Variable, matchSuccessToAtomThenFailureToNumber2) {
 // true.
 TEST(Variable, reAssignTheSameAtom){
 
-}
-*/
+}*/
 #endif

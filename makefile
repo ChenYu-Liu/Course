@@ -7,7 +7,7 @@ else
 	g++ -o hw2 mainTerm.o -lgtest -lpthread
 endif
 	
-mainTerm.o: mainTerm.cpp utTerm.h
+mainTerm.o: mainTerm.cpp utTerm.h number.h
 	g++ -std=gnu++0x -c mainTerm.cpp
 
 clean:	
