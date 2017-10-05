@@ -1,6 +1,8 @@
 #ifndef UTTERM_H
 #define UTTERM_H
+#include<iostream>
 #include<string>
+#include<typeinfo>
 #include"number.h"
 #include"atom.h"
 #include"variable.h"
@@ -78,7 +80,7 @@ TEST(Atom, matchSuccessToVarInstantedToDiffConstant) {
 	Variable X("X");
 	X.match(tom);
 	tom.match(X);
-	ASSERT_TRUE(X.value() == "tom");
+	ASSERT_TRUE(X.value()=="tom");
 }
 
 // ?- X=jerry, tom=X.
@@ -111,7 +113,7 @@ TEST(Variable, matchFailureToTwoDiffNumbers) {
 	Number _100(100);
 	X.match(_25);
 	X.match(_100);
-	ASSERT_FALSE((X.value() == "25")&(X.value() == "100"));
+	ASSERT_FALSE((X.value() == "25")&(X.value()=="100"));
 }
 
 // ?- X=tom, X= 25.
@@ -138,7 +140,7 @@ TEST(Variable, matchSuccessToAtomThenFailureToNumber2) {
 
 //?- X=tom, X=tom.
 //true.
-TEST(Variable, reAssignTheSameAtom) {
+TEST(Variable, reAssignTheSameAtom){
 	Variable X("X");
 	Atom tom("tom");
 	X.match(tom);

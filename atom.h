@@ -7,7 +7,7 @@
 #include"prolog.h"
 using namespace std;
 
-class  Atom :public Prolog {
+class  Atom :public Prolog{
 public:
 	Atom(string s);
 	virtual string value();
@@ -18,7 +18,7 @@ private:
 	string _symbol, _value, _type;
 };
 
-Atom::Atom(string s) {
+Atom::Atom(string s){
 	//if (!((char)s[0] > 64 & (char)s[0] < 91))	{
 	_symbol = s;
 	_value = s;
@@ -29,27 +29,27 @@ Atom::Atom(string s) {
 	//}
 }
 
-string Atom::value() {
+string Atom::value(){
 	return _value;
 }
 
-string Atom::symbol() {
+string Atom::symbol(){
 	return _symbol;
 }
 
-string Atom::type() {
+string Atom::type(){
 	return _type;
 }
 
-bool Atom::match(Prolog& ClsObj) {
+bool Atom::match(Prolog& ClsObj){
 	bool Check = true;
-	if (ClsObj.type() == _type) {
+	if (ClsObj.type() == _type){
 		Check = _value == ClsObj.value();
 	}
-	else if (ClsObj.type() == "Number") {
+	else if (ClsObj.type() == "Number"){
 		Check = false;
 	}
-	else if (ClsObj.type() == "Var") {
+	else if (ClsObj.type() == "Var"){
 		_value = ClsObj.symbol();
 	}
 	return Check;

@@ -11,7 +11,6 @@ mainTerm.o: mainTerm.cpp atom.h number.h prolog.h utTerm.h variable.h
 	g++ -std=gnu++0x -c mainTerm.cpp
 
 
-
 clean:	
 ifeq (${OS}, Windows_NT)
 	del *.o *.exe
