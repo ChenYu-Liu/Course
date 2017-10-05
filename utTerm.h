@@ -1,8 +1,5 @@
 #ifndef UTTERM_H
 #define UTTERM_H
-#include<iostream>
-#include<string>
-#include<typeinfo>
 #include"number.h"
 #include"atom.h"
 #include"variable.h"
