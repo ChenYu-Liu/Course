@@ -7,6 +7,7 @@
 #include"atom.h"
 #include"variable.h"
 #include<gtest\gtest.h>
+using namespace std;
 
 //test Number.value()
 TEST(Number, ctor) {

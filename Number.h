@@ -4,7 +4,7 @@
 #include<iostream>
 #include<string>
 #include"prolog.h"
-using std::string;
+using namespace std;
 
 class  Number :public Prolog
 {
