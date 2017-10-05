@@ -6,7 +6,7 @@
 #include"number.h"
 #include"atom.h"
 #include"variable.h"
-#include<gtest\gtest.h>
+//#include<gtest/gtest.h>
 using namespace std;
 
 //test Number.value()
