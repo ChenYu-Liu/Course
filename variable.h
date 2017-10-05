@@ -5,9 +5,9 @@
 #include"prolog.h"
 using namespace std;
 
-class Var :public Prolog{
+class Variable :public Prolog{
 public:
-	Var(string s);
+	Variable(string s);
 	virtual string value();
 	virtual string symbol();
 	virtual string type();
@@ -18,7 +18,7 @@ private:
 };
 
 
-Var::Var(string s){
+Variable::Variable(string s){
 	//if ((char)s[0] > 64 & (char)s[0] < 91)	{
 	_symbol = s;
 	_value = s;
@@ -29,7 +29,7 @@ Var::Var(string s){
 	//}
 }
 
-bool Var::match(Prolog& ClsObj){
+bool Variable::match(Prolog& ClsObj){
 	bool Check = true;
 	if (ClsObj.type() == _type){
 		Check = _value == ClsObj.value();
@@ -40,17 +40,17 @@ bool Var::match(Prolog& ClsObj){
 	return Check;
 }
 
-string Var::value(){
+string Variable::value(){
 	return _value;
 
 }
 
-string Var::type(){
+string Variable::type(){
 	return _type;
 }
 
 
-string Var::symbol(){
+string Variable::symbol(){
 	return _symbol;
 }
 
