@@ -1,5 +1,5 @@
 #include"utTerm.h"
-#include<gtest\gtest.h>
+#include<gtest/gtest.h>
 
 int main(int grgc,char** argv){
 	testing::InitGoogleTest(&argc,argv);
