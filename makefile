@@ -1,18 +1,19 @@
 all:hw2
 
-hw2: mainTerm.o 
+hw2: mainTerm.o
 ifeq (${OS}, Windows_NT)
 	g++ -o hw2 mainTerm.o -lgtest
 else
 	g++ -o hw2 mainTerm.o -lgtest -lpthread
 endif
 	
-mainTerm.o: mainTerm.cpp utTerm.h number.h
+mainTerm.o: mainTerm.cpp atom.h number.h prolog.h utTerm.h variable.h
 	g++ -std=gnu++0x -c mainTerm.cpp
+
 
 clean:	
 ifeq (${OS}, Windows_NT)
 	del *.o *.exe
 else
-	rm -f *.o exp
+	rm -f *.o hw2
 endif
