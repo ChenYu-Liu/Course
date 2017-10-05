@@ -10,6 +10,7 @@ public:
 	virtual string value() = 0;
 	virtual string type() = 0;
 	virtual bool match(Prolog&) = 0;
+	virtual void setvalue(string s) = 0;
 };
 
 

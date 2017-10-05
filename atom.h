@@ -10,10 +10,11 @@ using namespace std;
 class  Atom :public Prolog{
 public:
 	Atom(string s);
-	virtual string value();
-	virtual string symbol();
-	virtual string type();
-	virtual bool match(Prolog&);
+	string value();
+	string symbol();
+	string type();
+	void setvalue(string);
+	bool match(Prolog&);
 private:
 	string _symbol, _value, _type;
 };
@@ -33,6 +34,10 @@ string Atom::value(){
 	return _value;
 }
 
+void Atom::setvalue(string s){
+	_value = s;
+}
+
 string Atom::symbol(){
 	return _symbol;
 }
@@ -50,7 +55,10 @@ bool Atom::match(Prolog& ClsObj){
 		Check = false;
 	}
 	else if (ClsObj.type() == "Var"){
-		_value = ClsObj.symbol();
+		if ((ClsObj.value() != ClsObj.symbol())&(ClsObj.value() != _symbol))
+			Check = false;
+		else
+			ClsObj.setvalue(_symbol);
 	}
 	return Check;
 }

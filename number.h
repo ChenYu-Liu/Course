@@ -10,10 +10,11 @@ using namespace std;
 class  Number :public Prolog{
 public:
 	Number(int v);
-	virtual string value();
-	virtual string symbol();
-	virtual string type();
-	virtual bool match(Prolog&);
+	string value();
+	string symbol();
+	string type();
+	void setvalue(string);
+	bool match(Prolog&);
 private:
 	string  _type;
 	string _symbol;
@@ -30,6 +31,11 @@ Number::Number(int v){
 string Number::value(){
 	return to_string(_value);
 }
+
+void Number::setvalue(string s){
+	_value = stoi(s);
+}
+
 
 string Number::symbol(){
 	return _symbol;
@@ -48,7 +54,10 @@ bool Number::match(Prolog &ClsObj){
 		Check = false;
 	}
 	else if (ClsObj.type() == "Var"){
-		Check = true;
+		if ((ClsObj.value() != ClsObj.symbol())&(ClsObj.value() != _symbol))
+			Check = false;
+		else
+			ClsObj.setvalue(_symbol);
 	}
 	return Check;
 }

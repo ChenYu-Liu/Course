@@ -8,10 +8,11 @@ using namespace std;
 class Variable :public Prolog{
 public:
 	Variable(string s);
-	virtual string value();
-	virtual string symbol();
-	virtual string type();
-	virtual bool match(Prolog&);
+	string value();
+	string symbol();
+	string type();
+	void setvalue(string);
+	bool match(Prolog&);
 
 private:
 	string _symbol, _value, _type;
@@ -34,8 +35,17 @@ bool Variable::match(Prolog& ClsObj){
 	if (ClsObj.type() == _type){
 		Check = _value == ClsObj.value();
 	}
-	else if (ClsObj.type() == "Atom" | ClsObj.type() == "Number"){
-		_value = ClsObj.symbol();
+	else if (ClsObj.type() == "Atom"){
+		if ((_symbol != _value) & (ClsObj.value() != _value))
+			Check = false;
+		else
+			_value = ClsObj.value();
+	}
+	else if (ClsObj.type() == "Number"){
+		if ((_symbol!= _value) & (ClsObj.value() != _value))
+			Check = false;
+		else
+			_value = ClsObj.value();
 	}
 	return Check;
 }
@@ -44,6 +54,11 @@ string Variable::value(){
 	return _value;
 
 }
+
+void Variable::setvalue(string s){
+	_value = s;
+}
+
 
 string Variable::type(){
 	return _type;
