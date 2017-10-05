@@ -1,7 +1,7 @@
 // HW2_Matching.cpp : �w�q�D���x���ε{�����i�J�I�C
 //
-#include"utTerm.h"
 #include<gtest\gtest.h>
+#include"utTerm.h"
 
 int main(int argc, char** argv)
 {
