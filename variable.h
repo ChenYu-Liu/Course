@@ -5,7 +5,7 @@
 #include"prolog.h"
 using namespace std;
 
-class Variable :public Prolog{
+class Variable :public Prolog {
 public:
 	Variable(string s);
 	virtual string value();
@@ -18,7 +18,7 @@ private:
 };
 
 
-Variable::Variable(string s){
+Variable::Variable(string s) {
 	//if ((char)s[0] > 64 & (char)s[0] < 91)	{
 	_symbol = s;
 	_value = s;
@@ -29,28 +29,28 @@ Variable::Variable(string s){
 	//}
 }
 
-bool Variable::match(Prolog& ClsObj){
+bool Variable::match(Prolog& ClsObj) {
 	bool Check = true;
-	if (ClsObj.type() == _type){
+	if (ClsObj.type() == _type) {
 		Check = _value == ClsObj.value();
 	}
-	else if (ClsObj.type() == "Atom" | ClsObj.type() == "Number"){
+	else if (ClsObj.type() == "Atom" | ClsObj.type() == "Number") {
 		_value = ClsObj.symbol();
 	}
 	return Check;
 }
 
-string Variable::value(){
+string Variable::value() {
 	return _value;
 
 }
 
-string Variable::type(){
+string Variable::type() {
 	return _type;
 }
 
 
-string Variable::symbol(){
+string Variable::symbol() {
 	return _symbol;
 }
 

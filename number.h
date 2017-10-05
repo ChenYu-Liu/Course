@@ -22,13 +22,13 @@ private:
 };
 
 Number::Number(int v){
-	_symbol = std::to_string(v);
+	_symbol = to_string(v);
 	_value = v;
 	_type = "Number";
 }
 
 string Number::value(){
-	return std::to_string(_value);
+	return to_string(_value);
 }
 
 string Number::symbol(){
@@ -42,7 +42,7 @@ string Number::type(){
 bool Number::match(Prolog &ClsObj){
 	bool Check = true;
 	if (ClsObj.type() == _type){
-		Check = _value == std::stoi(ClsObj.value());
+		Check = _value == stoi(ClsObj.value());
 	}
 	else if (ClsObj.type() == "Atom"){
 		Check = false;
