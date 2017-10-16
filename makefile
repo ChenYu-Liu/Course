@@ -1,19 +1,19 @@
-all:hw2
+all:hw3
 
-hw2: mainTerm.o
+hw3: Main.o
 ifeq (${OS}, Windows_NT)
-	g++ -o hw2 mainTerm.o -lgtest
+	g++ -o hw3 Main.o -lgtest
 else
-	g++ -o hw2 mainTerm.o -lgtest -lpthread
+	g++ -o hw3 Main.o -lgtest -lpthread
 endif
 	
-mainTerm.o: mainTerm.cpp atom.h number.h prolog.h utTerm.h variable.h
-	g++ -std=gnu++0x -c mainTerm.cpp
+Main.o: Main.cpp atom.h number.h struct.h utAtom.h variable.h utStruct.h utVariable.h
+	g++ -std=gnu++0x -c Main.cpp
 
 
 clean:	
 ifeq (${OS}, Windows_NT)
 	del *.o *.exe
 else
-	rm -f *.o hw2
+	rm -f *.o hw3
 endif

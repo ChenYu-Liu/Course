@@ -2,71 +2,40 @@
 #define VARIABLE_H
 
 #include <string>
-#include"prolog.h"
-using namespace std;
+#include "atom.h"
+using std::string;
 
-class Variable :public Prolog{
+class Variable :public Term{
 public:
-	Variable(string s);
-	string value();
-	string symbol();
-	string type();
-	void setvalue(string);
-	bool match(Prolog&);
+	Variable(string s) :_symbol(s){}
+	string const _symbol;
+	string value(){
+		return _value;
 
+	}
+	string symbol() const{
+		return _symbol;
+	}
+
+	string value() const{
+		return _value;
+	}
+
+	bool match(Term &atom){
+		bool ret = _assignable;
+		if (_assignable){
+			_value = atom.symbol();
+			_assignable = false;
+		}
+		else{
+			return atom.value() == _value;
+		}
+
+		return ret;
+	}
 private:
-	string _symbol, _value, _type;
+	string _value;
+	bool _assignable = true;
 };
-
-
-Variable::Variable(string s){
-	//if ((char)s[0] > 64 & (char)s[0] < 91)	{
-	_symbol = s;
-	_value = s;
-	_type = "Var";
-	//}
-	//else{
-	//	cout << "Create Atom boj fail. The first latter must be capitalized.";
-	//}
-}
-
-bool Variable::match(Prolog& ClsObj){
-	bool Check = true;
-	if (ClsObj.type() == _type){
-		Check = _value == ClsObj.value();
-	}
-	else if (ClsObj.type() == "Atom"){
-		if ((_symbol != _value) & (ClsObj.value() != _value))
-			Check = false;
-		else
-			_value = ClsObj.value();
-	}
-	else if (ClsObj.type() == "Number"){
-		if ((_symbol!= _value) & (ClsObj.value() != _value))
-			Check = false;
-		else
-			_value = ClsObj.value();
-	}
-	return Check;
-}
-
-string Variable::value(){
-	return _value;
-
-}
-
-void Variable::setvalue(string s){
-	_value = s;
-}
-
-
-string Variable::type(){
-	return _type;
-}
-
-
-string Variable::symbol(){
-	return _symbol;
-}
 
 #endif

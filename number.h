@@ -1,65 +1,25 @@
 #ifndef NUMBER_H
 #define NUMBER_H
+#include "atom.h"
+#include <string>
+using std::string;
 
-#include<iostream>
-#include<string>
-#include"prolog.h"
-using namespace std; 
-
-
-class  Number :public Prolog{
+class Number :public Term
+{
 public:
-	Number(int v);
-	string value();
-	string symbol();
-	string type();
-	void setvalue(string);
-	bool match(Prolog&);
-private:
-	string  _type;
-	string _symbol;
-	int _value;
+	Number(double v) :_value(v){
+		std::ostringstream oss;
+		oss << _value;
+		_sybmol = oss.str();
+	}
 
+	string symbol()const{
+		return _sybmol;
+	}
+private:
+	string _sybmol;
+	double _value;
 };
 
-Number::Number(int v){
-	_symbol = to_string(v);
-	_value = v;
-	_type = "Number";
-}
-
-string Number::value(){
-	return to_string(_value);
-}
-
-void Number::setvalue(string s){
-	_value = stoi(s);
-}
-
-
-string Number::symbol(){
-	return _symbol;
-}
-
-string Number::type(){
-	return _type;
-}
-
-bool Number::match(Prolog &ClsObj){
-	bool Check = true;
-	if (ClsObj.type() == _type){
-		Check = _value == stoi(ClsObj.value());
-	}
-	else if (ClsObj.type() == "Atom"){
-		Check = false;
-	}
-	else if (ClsObj.type() == "Var"){
-		if ((ClsObj.value() != ClsObj.symbol())&(ClsObj.value() != _symbol))
-			Check = false;
-		else
-			ClsObj.setvalue(_symbol);
-	}
-	return Check;
-}
 
 #endif
