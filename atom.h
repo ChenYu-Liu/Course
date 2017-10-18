@@ -9,12 +9,15 @@ class Term{
 
 public:
 	virtual string symbol() const = 0;
-	//virtual bool setingValue(string s){}
 	virtual string value() const{
 		return symbol();
 	};
 	virtual bool match(Term & term) {
 		return symbol() == term.symbol();
+	}
+
+	virtual bool IsVariable(){
+		return false;
 	}
 };
 
@@ -24,6 +27,15 @@ public:
 
 	string symbol() const{
 		return _symbol;
+	}
+
+	bool match(Term & term){
+		if (term.IsVariable()){
+			return term.match(*this);
+		}
+		else{
+			return symbol() == term.symbol();
+		}
 	}
 
 	string _symbol;

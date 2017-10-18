@@ -30,4 +30,23 @@ TEST(Atom, Virtual)
 	EXPECT_EQ("tom", t->value());
 }
 
+TEST(Atom, Variable1){
+	Atom tom("tom");
+	Variable X("X");
+	ASSERT_TRUE(tom.match(X));
+}
+
+TEST(Number, Variable2){
+	Variable X("X");
+	Number _1(1);
+	ASSERT_TRUE(_1.match(X));
+}
+
+TEST(Struct, Variable3){
+	Variable X("X"), Y("Y");
+	std::vector<Term*> v = { &Y };
+	Struct s(Atom("s"), v);
+	s.match(Y);
+}
+
 #endif

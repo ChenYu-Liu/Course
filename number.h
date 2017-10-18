@@ -12,6 +12,15 @@ public:
 		oss << _value;
 		_sybmol = oss.str();
 	}
+	
+	bool match(Term & term){
+		if (term.IsVariable()){
+			return term.match(*this);
+		}
+		else{
+			return symbol() == term.symbol();
+		}
+	}
 
 	string symbol()const{
 		return _sybmol;

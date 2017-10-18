@@ -13,6 +13,9 @@ public:
 
 	std::vector<Variable * > RelateTable;
 
+	virtual bool IsVariable(){
+		return true;
+	}
 
 	string symbol() const{
 		return _symbol;
@@ -36,10 +39,10 @@ public:
 		if (objV){
 			RelateTable.push_back(objV);
 			objV->RelateTable.push_back(this);
-
-			if (_assignable & !objV->_assignable){
-				_value = objV->_value;
-			}
+			_value = objV->_value;
+			//if (_assignable & !objV->_assignable){
+			//	
+			//}
 
 			if (!_assignable){
 				SetingAll(RelateTable, this);

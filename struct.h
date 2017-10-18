@@ -54,9 +54,7 @@ public:
 			return true;
 		}
 		else if (obj){
-			string str1 = symbol();
-			string str2 = obj->value();
-			return  str1 == str2;
+			return  symbol() == obj->value();
 		}
 		return false;
 	}
