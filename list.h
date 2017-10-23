@@ -5,6 +5,7 @@
 #include <vector>
 using std::vector;
 
+
 class List : public Term {
 public:
 	string symbol() const;
@@ -23,33 +24,42 @@ private:
 	bool b_head = false, b_tail = false;
 };
 
+
 //head
 Term* List::head() const{
-	if (_elements.empty()){
+	try{
+		if (_elements.empty()){
+			throw 1;
+		}
+		return _elements[0];		
+	}
+	catch (int e){
 		List* list = new List();
 		list->b_head = true;
 		return list;
-	}
-	else{
-		return _elements[0];
 	}
 }
 
 //tail
 List* List::tail() const{
-	if (_elements.empty()){
+	try{
+		if (_elements.empty()){
+			throw 1;
+		}
+		else{
+			vector<Term*> v;
+			for (int i = 1; i < _elements.size(); i++){
+				v.push_back(_elements[i]);
+			}
+
+			List* objL = new List(v);
+			return objL;
+		}
+	}
+	catch (int e){
 		List* list = new List();
 		list->b_tail = true;
 		return list;
-	}
-	else{
-		vector<Term*> v;
-		for (int i = 1; i < _elements.size(); i++){
-			v.push_back(_elements[i]);
-		}
-
-		List* objL = new List(v);
-		return objL;
 	}
 }
 
