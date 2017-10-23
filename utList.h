@@ -214,16 +214,26 @@ TEST(List, headAndTailMatching4) {
 // When client still want to get the head of list
 // Then it should throw a string: "Accessing head in an empty list" as an exception.
 TEST(List, emptyExecptionOfHead) {
-	List list;
-	ASSERT_EQ("Accessing head in an empty list", list.head()->value());
+	try{
+		List list;
+		string str = list.head()->value();
+	}
+	catch (std::out_of_range const & error){
+		ASSERT_EQ("Accessing head in an empty list", string(error.what()));
+	}
 }
 
 // Given there is a empty list
 // When client still want to get the head of list
 // Then it should throw a string: "Accessing tail in an empty list" as an exception.
 TEST(List, emptyExecptionOfTail) {
-	List list;
-	ASSERT_EQ("Accessing tail in an empty list", list.tail()->value());
+	try{
+		List list;
+		list.tail()->value();
+	}
+	catch (std::out_of_range const& error){
+		ASSERT_EQ("Accessing tail in an empty list", string(error.what()));
+	}
 }
 
 

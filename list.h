@@ -3,7 +3,14 @@
 
 #include "atom.h"
 #include <vector>
+#include <stdexcept>
 using std::vector;
+
+
+//class OutOfRange :public std::logic_error{
+//public:
+//	explicit OutOfRange(const string& what_arg);
+//};
 
 
 class List : public Term {
@@ -27,39 +34,27 @@ private:
 
 //head
 Term* List::head() const{
-	try{
-		if (_elements.empty()){
-			throw 1;
-		}
-		return _elements[0];		
+	if (_elements.empty()){
+		throw std::out_of_range("Accessing head in an empty list");
 	}
-	catch (int e){
-		List* list = new List();
-		list->b_head = true;
-		return list;
+	else{
+		return _elements[0];
 	}
 }
 
 //tail
 List* List::tail() const{
-	try{
-		if (_elements.empty()){
-			throw 1;
-		}
-		else{
-			vector<Term*> v;
-			for (int i = 1; i < _elements.size(); i++){
-				v.push_back(_elements[i]);
-			}
-
-			List* objL = new List(v);
-			return objL;
-		}
+	if (_elements.empty()){
+		throw std::out_of_range("Accessing tail in an empty list");
 	}
-	catch (int e){
-		List* list = new List();
-		list->b_tail = true;
-		return list;
+	else{
+		vector<Term*> v;
+		for (int i = 1; i < _elements.size(); i++){
+			v.push_back(_elements[i]);
+		}
+
+		List* objL = new List(v);
+		return objL;
 	}
 }
 
@@ -69,48 +64,31 @@ bool List::IsList(){
 }
 
 string List::symbol() const{
-	if (b_head){
-		return "Accessing head in an empty list";
-	}
-	else if (b_tail){
-		return "Accessing tail in an empty list";
+	string str = "[";
+	if (!_elements.empty()){
+		for (int i = 0; i < _elements.size() - 1; i++){
+			str += _elements[i]->symbol() + ", ";
+		}
+		str += _elements[_elements.size() - 1]->symbol() + "]";
 	}
 	else{
-		string str = "[";
-		if (!_elements.empty()){
-			for (int i = 0; i < _elements.size() - 1; i++){
-				str += _elements[i]->symbol() + ", ";
-			}
-			str += _elements[_elements.size() - 1]->symbol() + "]";
-		}
-		else{
-			str += "]";
-		}
-		return str;
-
+		str += "]";
 	}
+	return str;
 }
 
 string List::value() const{
-	if (b_head){
-		return "Accessing head in an empty list";
-	}
-	else if (b_tail){
-		return "Accessing tail in an empty list";
+	string str = "[";
+	if (!_elements.empty()){
+		for (int i = 0; i < _elements.size() - 1; i++){
+			str += _elements[i]->value() + ", ";
+		}
+		str += _elements[_elements.size() - 1]->value() + "]";
 	}
 	else{
-		string str = "[";
-		if (!_elements.empty()){
-			for (int i = 0; i < _elements.size() - 1; i++){
-				str += _elements[i]->value() + ", ";
-			}
-			str += _elements[_elements.size() - 1]->value() + "]";
-		}
-		else{
-			str += "]";
-		}
-		return str;
+		str += "]";
 	}
+	return str;
 }
 
 bool List::match(Term & term){
