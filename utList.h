@@ -216,10 +216,10 @@ TEST(List, headAndTailMatching4) {
 TEST(List, emptyExecptionOfHead) {
 	try{
 		List list;
-		string str = list.head()->value();
+		list.head()->value();
 	}
-	catch (std::out_of_range const & error){
-		ASSERT_EQ("Accessing head in an empty list", string(error.what()));
+	catch (const char* error){
+		ASSERT_EQ("Accessing head in an empty list", error);
 	}
 }
 
@@ -231,8 +231,8 @@ TEST(List, emptyExecptionOfTail) {
 		List list;
 		list.tail()->value();
 	}
-	catch (std::out_of_range const& error){
-		ASSERT_EQ("Accessing tail in an empty list", string(error.what()));
+	catch (const char* error){
+		ASSERT_EQ("Accessing tail in an empty list", error);
 	}
 }
 

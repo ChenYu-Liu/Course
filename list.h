@@ -3,7 +3,6 @@
 
 #include "atom.h"
 #include <vector>
-#include <stdexcept>
 using std::vector;
 
 
@@ -35,7 +34,7 @@ private:
 //head
 Term* List::head() const{
 	if (_elements.empty()){
-		throw std::out_of_range("Accessing head in an empty list");
+		throw "Accessing head in an empty list";
 	}
 	else{
 		return _elements[0];
@@ -45,7 +44,7 @@ Term* List::head() const{
 //tail
 List* List::tail() const{
 	if (_elements.empty()){
-		throw std::out_of_range("Accessing tail in an empty list");
+		throw "Accessing tail in an empty list";
 	}
 	else{
 		vector<Term*> v;
