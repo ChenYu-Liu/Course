@@ -34,7 +34,7 @@ private:
 //head
 Term* List::head() const{
 	if (_elements.empty()){
-		throw "Accessing head in an empty list";
+		throw string("Accessing head in an empty list");
 	}
 	else{
 		return _elements[0];
@@ -44,7 +44,7 @@ Term* List::head() const{
 //tail
 List* List::tail() const{
 	if (_elements.empty()){
-		throw "Accessing tail in an empty list";
+		throw string("Accessing tail in an empty list");
 	}
 	else{
 		vector<Term*> v;
