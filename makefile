@@ -1,10 +1,10 @@
-all:hw4
+all:hw5
 
-hw4: Main.o
+hw5: Main.o
 ifeq (${OS}, Windows_NT)
-	g++ -o hw4 Main.o -lgtest
+	g++ -o hw5 Main.o -lgtest
 else
-	g++ -o hw4 Main.o -lgtest -lpthread
+	g++ -o hw5 Main.o -lgtest -lpthread
 endif
 	
 Main.o: Main.cpp atom.h number.h struct.h utAtom.h variable.h utStruct.h utVariable.h list.h utList.h
@@ -15,5 +15,5 @@ clean:
 ifeq (${OS}, Windows_NT)
 	del *.o *.exe
 else
-	rm -f *.o hw4
+	rm -f *.o hw5
 endif

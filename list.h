@@ -1,7 +1,7 @@
 #ifndef LIST_H
 #define LIST_H
 
-#include "atom.h"
+#include "term.h"
 #include <vector>
 using std::vector;
 

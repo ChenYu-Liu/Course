@@ -1,7 +1,7 @@
 #ifndef STRUCT_H
 #define STRUCT_H
 
-#include "atom.h"
+#include "term.h"
 #include <vector>
 #include <string>
 
@@ -11,6 +11,10 @@ class Struct :public Term
 {
 public:
 	Struct(Atom const & name, std::vector<Term *> args) :_name(name), _args(args) {}
+
+	int arity(){
+		return _args.size();
+	}
 
 	Term * args(int index) {
 		return _args[index];
@@ -31,7 +35,11 @@ public:
 
 	string symbol() const{
 		string ret = _name.symbol() + "(";
-		for (int i = 0; i < _args.size() - 1; i++){
+		if (_args.empty()){
+			return ret + ')';
+		}
+
+		for (int i = 0; i < _args.size() - 1 ; i++){
 			ret += _args[i]->symbol() + ", ";
 		}
 		ret += _args[_args.size() - 1]->symbol() + ")";

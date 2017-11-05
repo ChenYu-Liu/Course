@@ -2,7 +2,7 @@
 #define VARIABLE_H
 
 #include <string>
-#include "atom.h"
+#include "term.h"
 using std::string;
 
 class Variable :public Term{
