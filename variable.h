@@ -39,7 +39,13 @@ public:
 		if (objV){
 			RelateTable.push_back(objV);
 			objV->RelateTable.push_back(this);
-			_value = objV->_value;
+			
+			if (_assignable){
+				_value = objV->_value;
+			}
+			else if (objV->_assignable){
+				ret = objV->_assignable;
+			}
 
 			if (!_assignable){
 				SetingAll(RelateTable, this);

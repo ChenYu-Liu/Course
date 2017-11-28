@@ -2,6 +2,7 @@
 #define STRUCT_H
 
 #include "term.h"
+#include "atom.h"
 #include <vector>
 #include <string>
 
@@ -17,7 +18,7 @@ public:
 	}
 
 	Term * args(int index) {
-		return _args[index];
+		return _args[index];//_args[index]=new address
 	}
 
 	Atom const & name() {
@@ -71,9 +72,9 @@ public:
 		return _args;
 	}
 
-private:
-	Atom _name;
 	std::vector<Term *> _args;
+private:
+	Atom _name;	
 	Struct * objS;
 };
 

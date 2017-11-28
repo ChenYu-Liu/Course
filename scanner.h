@@ -56,6 +56,10 @@ public:
 		return buffer[pos];
 	}
 
+	char checkOutNextToken(){		
+		return buffer[pos+1];
+	}
+
 	// extractX: extract X and set position right after X
 	int extractNumber() {
 		int posBegin = position();
