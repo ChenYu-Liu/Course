@@ -4,7 +4,7 @@
 #include <string>
 using std::string;
 
-template<class T>
+
 class Iterator;
 class Term{
 public:
@@ -16,9 +16,9 @@ public:
 	virtual bool IsList();
 
 	//Iterator methode
-	virtual Iterator<Term>* createIterator();
-	virtual Iterator<Term>* createDFSIterator();
-	virtual Iterator<Term> * createBFSIterator();
+	virtual Iterator * createIterator();
+	virtual Iterator * createDFSIterator();
+	virtual Iterator * createBFSIterator();
 
 };
 

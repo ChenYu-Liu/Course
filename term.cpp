@@ -1,5 +1,6 @@
 #include "term.h"
 #include "iterator.h"
+//#include <string>
 
 string Term::value() const{
 	return symbol();
@@ -18,14 +19,14 @@ bool Term::IsList(){
 }
 
 //³Ñ¤U Iterator
-Iterator<Term>* Term::createIterator(){
-	return new NullIterator<Term>(this);
+Iterator* Term::createIterator(){
+	return new NullIterator(this);
 }
 
-Iterator<Term>* Term::createBFSIterator(){
-	return new NullIterator<Term>(this);
+Iterator* Term::createBFSIterator(){
+	return new NullIterator(this);
 }
 
-Iterator<Term>* Term::createDFSIterator(){
-	return new NullIterator<Term>(this);
+Iterator* Term::createDFSIterator(){
+	return new NullIterator(this);
 }

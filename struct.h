@@ -20,9 +20,9 @@ public:
 	bool match(Term &term);
 	std::vector<Term*> getArgs();
 	std::vector<Term *> _args;
-	Iterator<Term>* createIterator();
-	Iterator<Term>* createDFSIterator();
-	Iterator<Term>* createBFSIterator();
+	Iterator* createIterator();
+	Iterator* createDFSIterator();
+	Iterator* createBFSIterator();
 private:
 	Atom _name;	
 	Struct * objS;
