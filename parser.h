@@ -19,7 +19,7 @@ public:
 	Parser(Scanner scanner) : _scanner(scanner), _terms(){}
 	//運算子、運算元
 	std::stack<Node*>  stackOPtors, stackOPtor;
-	std::vector<Term*> getStructVar;
+	std::vector<Term*> getTermsOfTerm;
 
 	//建立 X = 1 的小樹。
 	void smallTree(){
@@ -40,16 +40,16 @@ public:
 		if (_struct){
 			for (int i = 0; i < _struct->arity(); i++){
 				if (!getVarOfStruct(_struct->args(i)) & _struct->args(i)->IsVariable()){
-					if (getStructVar.size() == 0) { getStructVar.push_back(_struct->args(i)); }
+					if (getTermsOfTerm.size() == 0) { getTermsOfTerm.push_back(_struct->args(i)); }
 					else{
 						bool set = false;
-						for (int k = 0; k < getStructVar.size(); k++){
-							if (_struct->args(i)->symbol() == getStructVar[k]->symbol()){
-								_struct->_args[i] = getStructVar[k];
+						for (int k = 0; k < getTermsOfTerm.size(); k++){
+							if (_struct->args(i)->symbol() == getTermsOfTerm[k]->symbol()){
+								_struct->_args[i] = getTermsOfTerm[k];
 								set = true;
 							}
 						}
-						if (!set) { getStructVar.push_back(_struct->args(i)); }
+						if (!set) { getTermsOfTerm.push_back(_struct->args(i)); }
 					}
 				}
 			}
@@ -65,11 +65,11 @@ public:
 	}
 
 	void matchings(){
-		int token = _scanner.currentChar(), tag = 0;
-		while (token != '.')
+		int tag = 0;
+		while (_scanner.currentChar() != '.')
 		{
 			Node* node = new Node(TERM);
-			if (token == ','){
+			if (_scanner.currentChar() == ','){
 				node->payload = COMMA;
 				//建立小樹
 				smallTree();
@@ -78,7 +78,7 @@ public:
 				tag = 1;
 				_scanner.nextToken();
 			}
-			else if (token == ';'){
+			else if (_scanner.currentChar() == ';'){
 				node->payload = SEMICOLON;
 				//建立小樹
 				smallTree();
@@ -87,7 +87,7 @@ public:
 				stackOPtors.push(node);
 				_scanner.nextToken();
 			}
-			else if (token == '='){
+			else if (_scanner.currentChar() == '='){
 				node->payload = EQUALITY;
 				stackOPtors.push(node);
 				_scanner.nextToken();
@@ -96,28 +96,27 @@ public:
 
 				Term* obj = createTerm();
 				if (tag == 2){
-					getStructVar.clear();
+					getTermsOfTerm.clear();
 					tag = 0;
 				}
 				//存取 ; 後所有的 term ，包含 struct 的 term。
 				getVarOfStruct(obj);
 				//Var and Var 建立關係。
 				if (tag == 1){
-					for (int i = 0; i < getStructVar.size(); i++){
-						if (getStructVar[i]->symbol() == obj->symbol()){
-							obj = getStructVar[i];
+					for (int i = 0; i < getTermsOfTerm.size(); i++){
+						if (getTermsOfTerm[i]->symbol() == obj->symbol()){
+							obj = getTermsOfTerm[i];
 						}
 					}
 				}
 
-				getStructVar.push_back(obj);
+				getTermsOfTerm.push_back(obj);
 				_terms.push_back(obj);
 				//save term to stack 
 				node->payload = TERM;
 				node->term = obj;
 				stackOPtor.push(node);
 			}
-			token = _scanner.currentChar();
 		}
 		smallTree();
 
