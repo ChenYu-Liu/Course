@@ -80,19 +80,6 @@ TEST(iterator, nullIterator){
 	ASSERT_TRUE(it->isDone());
 }
 
-// //down test is mob programing 
-TEST(iterator, AtomDfsTreeIterator)
-{
-	Atom atom("atom");
-	Iterator<Term*> *it = atom.createDFSIterator();
-	it->first();
-	ASSERT_TRUE(it->isDone());
-
-	it = atom.createBFSIterator();
-	it->first();
-	ASSERT_TRUE(it->isDone());
-}
-
 ////s(1, t(1,2), X)
 ///*
 //	   s(1, t(1,2), X)
@@ -176,36 +163,6 @@ TEST(iterator, TreeDfsIteratorList){
 	ASSERT_EQ("2", it->currentItem()->symbol());
 	it->next();
 	ASSERT_EQ("X", it->currentItem()->symbol());
-	it->next();
-	ASSERT_TRUE(it->isDone());
-}
-
-TEST(iterator, TreeDfsIteratorListNace){
-	Number _1(1), _2(2);
-	Variable X("X");
-	vector<Term*> v = { &_1, &_2 };
-	Struct t(Atom("t"), v);
-	vector<Term*> v2 = {&t};
-	Struct t1(Atom("t"), v2);
-	List l(v);
-	vector<Term*> v3 = {&t1, &l };
-	Struct S(Atom("t"), v3);
-	
-	Iterator<Term*> *it = S.createDFSIterator();
-	it->first();
-	ASSERT_EQ("t(t(1, 2))", it->currentItem()->symbol());
-	it->next();
-	ASSERT_EQ("t(1, 2)", it->currentItem()->symbol());
-	it->next();
-	ASSERT_EQ("1", it->currentItem()->symbol());
-	it->next();
-	ASSERT_EQ("2", it->currentItem()->symbol());
-	it->next();
-	ASSERT_EQ("[1, 2]", it->currentItem()->symbol());
-	it->next();
-	ASSERT_EQ("1", it->currentItem()->symbol());
-	it->next();
-	ASSERT_EQ("2", it->currentItem()->symbol());
 	it->next();
 	ASSERT_TRUE(it->isDone());
 }
