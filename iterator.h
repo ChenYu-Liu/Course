@@ -10,36 +10,38 @@
 
 using namespace std;
 
+template<class T>
 class Iterator {
 public:
 	virtual void first() = 0;
 	virtual void next() = 0;
-	virtual Term* currentItem() const = 0;
+	virtual T currentItem() const = 0;
 	virtual bool isDone() const = 0;
 };
 
-class NullIterator :public Iterator{
+template<class T>
+class NullIterator :public Iterator<T>{
 public:
-	NullIterator(Term *n){}
+	NullIterator(T n){}
 	void first(){}
 	void next(){}
-	Term * currentItem() const{
+	T currentItem() const{
 		return nullptr;
-	}
+	};
 	bool isDone() const{
 		return true;
 	}
-
 };
 
-class StructIterator :public Iterator {
+template<class T>
+class StructIterator :public Iterator<T>{
 public:
 	friend class Struct;
 	void first() {
 		_index = 0;
 	}
 
-	Term* currentItem() const {
+	T currentItem() const {
 		return _s->args(_index);
 	}
 
@@ -51,12 +53,13 @@ public:
 		_index++;
 	}
 private:
-	StructIterator(Struct *s) : _index(0), _s(s) {}
+	StructIterator(Struct *s) : _index(0),_s(s){}
 	int _index;
 	Struct* _s;
 };
 
-class ListIterator :public Iterator {
+template<class T>
+class ListIterator :public Iterator<T> {
 public:
 	ListIterator(List *list) : _index(0), _list(list) {}
 
@@ -64,7 +67,7 @@ public:
 		_index = 0;
 	}
 
-	Term* currentItem() const {
+	T currentItem() const {
 		return _list->args(_index);
 	}
 
@@ -80,9 +83,10 @@ private:
 	List* _list;
 };
 
-class DFSIterator : public Iterator{
+template<class T>
+class DFSIterator : public Iterator<T>{
 public:
-	DFSIterator(Term* term) :_term(term), _index(0){
+	DFSIterator(T term) :_term(term), _index(0){
 
 	}
 	//s(1, t(1,2), X)
@@ -114,9 +118,9 @@ public:
 	*/
 	void first(){
 		_index = 0;
-		Term* term;
-		std::stack<Term*> stk;
-		std::vector<Term*> rev;
+		T term;
+		std::stack<T> stk;
+		std::vector<T> rev;
 		stk.push(_term);
 
 		while (!stk.empty()){
@@ -125,9 +129,7 @@ public:
 			if (_term != term){
 				_dfsTerms.push_back(term);
 			}
-
-			Iterator * it = term->createIterator();
-
+			Iterator<T>* it = term->createIterator();
 			rev.clear();
 			for (it->first(); !it->isDone(); it->next()){
 				rev.push_back(it->currentItem());
@@ -142,27 +144,29 @@ public:
 	void next(){
 		_index++;
 	}
-	Term* currentItem() const{
+
+	T currentItem() const{
 		return _dfsTerms[_index];
 	}
 	bool isDone() const{
 		return _index >= _dfsTerms.size();
 	}
 private:
-	std::vector<Term*> _dfsTerms;
-	Term* _term;
+	std::vector<T> _dfsTerms;
+	T _term;
 	int _index;
 };
 
-class BFSIterator : public Iterator {
+template<class T>
+class BFSIterator : public Iterator<T> {
 public:
-	BFSIterator(Term* term) :_term(term), _index(0){
+	BFSIterator(T term) :_term(term), _index(0){
 
 	}
 	void first(){
-		Term * term;
+		T term;
 		_index = 0;
-		queue<Term*> que;
+		queue<T> que;
 		que.push(_term);
 		while (!que.empty()) {
 			term = que.front();
@@ -171,7 +175,7 @@ public:
 			if (_term != term){
 				_bfsTerms.push_back(term);
 			}
-			Iterator * it = term->createIterator();
+			Iterator<T>* it = term->createIterator();
 			for (it->first(); !it->isDone(); it->next()){
 				que.push(it->currentItem());
 			}
@@ -180,17 +184,16 @@ public:
 	void next(){
 		_index++;
 	}
-	Term* currentItem() const{
+	T currentItem() const{
 		return _bfsTerms[_index];
 	}
 	bool isDone() const{
 		return _index >= _bfsTerms.size();
 	}
 private:
-	std::vector<Term*> _bfsTerms;
-	Term* _term;
+	std::vector<T> _bfsTerms;
+	T _term;
 	int _index;
-
 };
 
 #endif

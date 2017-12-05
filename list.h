@@ -19,10 +19,9 @@ public:
 	List * tail() const;
 	Term * args(int index);
 	int arity() const;
-	Iterator* createIterator();
-	Iterator* createDFSIterator();
-	Iterator* createBFSIterator();
-
+	Iterator<Term*>* createIterator();
+	Iterator<Term*>* createDFSIterator();
+	Iterator<Term*>* createBFSIterator();
 private:
 	vector<Term *> _elements;
 	bool b_head = false, b_tail = false;
