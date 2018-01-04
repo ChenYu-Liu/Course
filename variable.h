@@ -1,98 +1,81 @@
-#ifndef VARIABLE_H
-#define VARIABLE_H
-#include "term.h"
+#ifndef VAR_H
+#define VAR_H
 #include <string>
+#include <iostream>
+#include <vector>
+#include "term.h"
+
 using std::string;
 
-class Variable :public Term{
-public:
-	Variable(string s) :_symbol(s), _value(s){}
-
-	string const _symbol;
-
-	std::vector<Variable * > RelateTable;
-
-	virtual bool IsVariable(){
-		return true;
-	}
-
-	string symbol() const{
-		return _symbol;
-	}
-
-	string value() const{
-		if (_assignable){
-			return _value;
+class Variable : public Term{ 
+	public:
+		Variable(string s):Term(s), _termValue(0) {}
+		
+		string value() const{
+            if (_termValue) 
+                return _termValue->value();
+			return Term::value();
 		}
-		else{
-			return term->value();
+
+		bool isVar(){
+			return true;
 		}
-	}
 
-	bool match(Term &atom){
-		bool ret = _assignable;
-
-		//存取其他 Variable 的指標位置。
-		Variable* objV = dynamic_cast<Variable*>(&atom);
-
-		if (objV){
-			RelateTable.push_back(objV);
-			objV->RelateTable.push_back(this);
-			
-			if (_assignable){
-				_value = objV->_value;
-			}
-			else if (objV->_assignable){
-				ret = objV->_assignable;
-			}
-
-			if (!_assignable){
-				SetingAll(RelateTable, this);
-			}
-
-			if (!objV->_assignable){
-				objV->SetingAll(objV->RelateTable, objV);
+	    //find the variable relationships that x match y and y match z
+	    void findValue(Variable* v,Term *t){
+			for(unsigned int i = 0;i < v->have_match.size();i++){
+				if(v->have_match[i]->assignable == false)
+					break;
+				else{
+                    v->have_match[i]->_termValue = t;
+					v->have_match[i]->assignable = false;
+					
+				}	
+				findValue(v->have_match[i],t);   
 			}
 		}
-		else{
-			//非 variable 並直接給值的情況。
-			if (atom.IsList()){
-				ret = atom.match(*this);
-				if (ret){
-					_assignable = false;
-					_value = atom.value();
-					term = &atom;
-					SetingAll(RelateTable, &atom);
+		
+		bool match(Term &t){
+			Variable *var = dynamic_cast<Variable*> (&t); 
+			//if the term is variable build relationships
+			if(var){
+				have_match.push_back(var);
+				var->have_match.push_back(this);
+				if(assignable && !var->assignable){
+					findValue(var,var);
 				}
+				if(!assignable && var->assignable){
+					findValue(this,this);
+				}
+				if(!assignable && !var->assignable){
+					return value() == t.value();
+				}
+				return true;		
 			}
-			else if (_assignable){
-				_assignable = false;
-				_value = atom.value();
-				term = &atom;
-				SetingAll(RelateTable, &atom);
-			}
-			else{
-				return atom.value() == _value;
+			if(assignable && !var){
+				if(t.isList()){
+					if(t.match(*this)){
+						_termValue = &t;
+						assignable = false;
+						findValue(this,&t);
+						return t.match(*this);
+					}
+					return t.match(*this);
+				}
+				_termValue = &t;
+				assignable = false;
+				findValue(this,&t);
+				return true;
+			}else{
+                return value() == t.value();
 			}
 		}
-		return ret;
-	}
+		
 
-private:
-	Term* term = this;
-	string _value;
-	bool _assignable = true;
-	//走訪所有相依表並賦予值。
-	void SetingAll(std::vector<Variable *> pot, Term* term){
-		for (int i = 0; i < pot.size(); i++){
-			if (pot[i]->_assignable){
-				pot[i]->term = term;
-				pot[i]->_value = term->value();
-				pot[i]->_assignable = false;
-				SetingAll(pot[i]->RelateTable, term);
-			}
-		}
-	}
+	private:
+		bool assignable = true;
+		std::vector <Variable *> have_match;
+		Term * _termValue;
 };
 
 #endif

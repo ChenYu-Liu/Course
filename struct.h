@@ -1,31 +1,39 @@
 #ifndef STRUCT_H
 #define STRUCT_H
-
+#include <vector>
 #include "term.h"
 #include "atom.h"
-#include <vector>
-#include <string>
 
-using std::string;
+class Struct : public Term{
+	public:
+		bool match(Term &t);
+		string symbol() const;
+		string value() const;
+		Iterator<Term*> *createIterator();
+		Iterator<Term*> *createBFSIterator();
+		Iterator<Term*> *createDFSIterator();
+	public:
+	   Struct (Atom const &name, std::vector<Term *> v)
+			:_name(name), _argc(v){}
 
-class Struct :public Term
-{
-public:
-	Struct(Atom const & name, std::vector<Term *> args) :_name(name), _args(args) {}
-	int arity();
-	Term * args(int index);
-	Atom const & name();
-	string value() const;
-	string symbol() const;
-	bool match(Term &term);
-	std::vector<Term*> getArgs();
-	std::vector<Term *> _args;
-	Iterator<Term*>* createIterator();
-	Iterator<Term*>* createDFSIterator();
-	Iterator<Term*>* createBFSIterator();
-private:
-	Atom _name;	
-	Struct * objS;
+       Struct (Atom const &name)
+			:_name(name), _argc(){}
+			
+		Atom const & name() {
+			return _name;			
+		}	
+
+		Term* args(int index){
+			return _argc[index];
+		}
+
+		int arity(){
+			return _argc.size();
+		}
+		
+	private:
+		Atom _name;
+		std::vector<Term *> _argc;
 };
 
 #endif

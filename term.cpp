@@ -1,31 +1,22 @@
 #include "term.h"
+#include <vector>
 #include "iterator.h"
 
-string Term::value() const{
-	return symbol();
+Iterator<Term*> * Term::createIterator(){
+  return new NullIterator<Term*>(this);
 }
 
-bool Term::IsVariable(){
-	return false;
+Iterator<Term*> * Term::createBFSIterator(){
+  return new NullIterator<Term*>(this);
 }
 
-bool Term::match(Term& term){
-	return symbol() == term.symbol();
+Iterator<Term*> * Term::createDFSIterator(){
+  return new NullIterator<Term*>(this);
 }
 
-bool Term::IsList(){
-	return false;
-}
-
-//³Ñ¤U Iterator
-Iterator<Term*>* Term::createIterator(){
-	return new NullIterator<Term*>(this);
-}
-
-Iterator<Term*>* Term::createBFSIterator(){
-	return new NullIterator<Term*>(this);
-}
-
-Iterator<Term*>* Term::createDFSIterator(){
-	return new NullIterator<Term*>(this);
+bool Term::match(Term &t){
+  if(t.isVar()){
+    return t.match(*this);
+  }
+  return value() == t.value();
 }

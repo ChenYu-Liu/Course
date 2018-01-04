@@ -1,34 +1,22 @@
 #ifndef NUMBER_H
 #define NUMBER_H
-#include "term.h"
+#include <iostream>
 #include <string>
+#include <sstream>
+#include "term.h"
+
+
+
 using std::string;
+using std::to_string;
 
-class Number :public Term
-{
-public:
-	Number(double v) :_value(v){
-		std::ostringstream oss;
-		oss << _value;
-		_sybmol = oss.str();
-	}
-	
-	bool match(Term & term){
-		if (term.IsVariable()){
-			return term.match(*this);
-		}
-		else{
-			return symbol() == term.symbol();
-		}
-	}
-
-	string symbol()const{
-		return _sybmol;
-	}
-private:
-	string _sybmol;
-	double _value;
+class Number :public Term{ 
+	public:
+		Number (double value){
+			std::stringstream ss ;
+			ss << value;
+			_symbol = ss.str();
+		} 
 };
-
 
 #endif
